@@ -21,12 +21,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> statelessStrings = <Widget>[];
-    List<Widget> statefulStrings = <Widget>[];
-    _strings.forEach((s) {
-      statelessStrings.add(Text(s));
-      statefulStrings.add(SampleWidget(s));
-    });
 
     List<Widget> statelessResult = <Widget>[];
     List<Widget> statefulResult = <Widget>[];
@@ -38,7 +32,6 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         appBar: AppBar(
           title: Text('API docs suggestion'),
-          elevation: 0.0,
         ),
         body: SingleChildScrollView(
             child: Column(
@@ -46,60 +39,32 @@ class _HomePageState extends State<HomePage> {
                 Text("[builder] Search works with stateless widgets"),
                 Container(
                     height: 120,
-                    child: _result.length != 0
-                        ? ListView.builder(
+                    child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: _result.length,
                       itemBuilder: (context, i) => Text(_result[i]),
-                    )
-                        : ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: _strings.length,
-                      itemBuilder: (context, i) => Text(_strings[i]),
                     )),
                 Text("[builder] Search do not works with stateful widgets"),
                 Container(
                     height: 120,
-                    child: _result.length != 0
-                        ? ListView.builder(
+                    child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: _result.length,
                       itemBuilder: (context, i) => SampleWidget(_result[i]),
-                    )
-                        : ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: _strings.length,
-                      itemBuilder: (context, i) => SampleWidget(_strings[i]),
                     )),
                 Text(
                     "[explicit List<Widget> children] Search works with stateless widgets"),
                 Container(
                     height: 120,
-                    child: _result.length != 0
-                        ? ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: _result.length,
-                      itemBuilder: (context, i) => Text(_result[i]),
-                    )
-                        : ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: _strings.length,
-                      itemBuilder: (context, i) => Text(_strings[i]),
+                    child:  ListView(
+                      children: statelessResult
                     )),
                 Text(
                     "[explicit List<Widget> children] Search do not works with stateful widgets"),
                 Container(
                     height: 120,
-                    child: _result.length != 0
-                        ? ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: _result.length,
-                      itemBuilder: (context, i) => SampleWidget(_result[i]),
-                    )
-                        : ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: _strings.length,
-                      itemBuilder: (context, i) => SampleWidget(_strings[i]),
+                    child:  ListView(
+                      children: statefulResult,
                     )),
                 ListTile(
                   leading: Icon(Icons.search),
